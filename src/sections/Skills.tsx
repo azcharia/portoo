@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from 'react';
 import { 
   Code2, 
   Database, 
-  Layout, 
   Smartphone, 
   Cloud, 
   GitBranch,

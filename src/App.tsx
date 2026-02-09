@@ -73,7 +73,7 @@ function App() {
   };
 
   const wheelProgressRef = useRef(0);
-  const wheelTimeoutRef = useRef<NodeJS.Timeout>();
+  const wheelTimeoutRef = useRef<ReturnType<typeof setTimeout>>();
 
   const handleWheel = (e: WheelEvent) => {
     if (!showIntro) return;
