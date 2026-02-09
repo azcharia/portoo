@@ -73,7 +73,7 @@ function App() {
   };
 
   const wheelProgressRef = useRef(0);
-  const wheelTimeoutRef = useRef<ReturnType<typeof setTimeout>>();
+  const wheelTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const handleWheel = (e: WheelEvent) => {
     if (!showIntro) return;
@@ -89,7 +89,7 @@ function App() {
       }
 
       // Reset progress after scroll stops
-      if (wheelTimeoutRef.current) {
+      if (wheelTimeoutRef.current !== null) {
         clearTimeout(wheelTimeoutRef.current);
       }
       wheelTimeoutRef.current = setTimeout(() => {
@@ -105,7 +105,7 @@ function App() {
       window.addEventListener('wheel', handleWheel, { passive: true });
       return () => {
         window.removeEventListener('wheel', handleWheel);
-        if (wheelTimeoutRef.current) {
+        if (wheelTimeoutRef.current !== null) {
           clearTimeout(wheelTimeoutRef.current);
         }
       };
