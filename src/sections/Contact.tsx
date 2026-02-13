@@ -131,6 +131,8 @@ const Contact = () => {
                     <a
                       key={social.label}
                       href={social.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className={`w-12 h-12 rounded-xl bg-[#181818] border border-white/10 flex items-center justify-center text-[#b6b6b6] hover:text-[#00ff41] hover:border-[#00ff41]/30 transition-all duration-300 hover:scale-110 ${
                         isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-50'
                       }`}

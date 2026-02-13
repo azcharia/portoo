@@ -110,6 +110,8 @@ const Footer = () => {
                   <li key={link.name}>
                     <a
                       href={link.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className="text-sm text-[#b6b6b6] hover:text-[#00ff41] transition-colors font-mono"
                     >
                       {link.name}
@@ -145,7 +147,7 @@ const Footer = () => {
           <div className="flex items-center gap-2 text-sm text-[#b6b6b6]">
             <span>Made with</span>
             <Heart size={16} className="text-red-500 fill-red-500" />
-            <span>using Flutter, Laravel & React</span>
+            <span>using React & Tailwind CSS</span>
           </div>
 
           <div className="flex items-center gap-6">

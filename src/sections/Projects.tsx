@@ -213,6 +213,8 @@ const Projects = () => {
                 </a>
                 <a
                   href={projects[activeProject].github}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="flex items-center gap-2 px-6 py-3 border border-white/20 text-white font-semibold rounded-full hover:border-[#00ff41] hover:text-[#00ff41] transition-all font-mono"
                 >
                   <Github size={18} />

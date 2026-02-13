@@ -121,10 +121,10 @@ const Skills = () => {
             {techStack.map((tech, index) => (
               <div
                 key={tech.name}
-                className="group flex items-center gap-3 px-6 py-3 rounded-full bg-[#181818] border border-white/10 hover:border-[#00ff41]/50 transition-all duration-300 hover:scale-105"
+                className="group flex items-center gap-3 px-6 py-3 rounded-full bg-[#181818] border border-white/10 hover:border-[#00ff41]/50 transition-all duration-300 hover:scale-105 cursor-pointer"
                 style={{ transitionDelay: `${index * 50}ms` }}
               >
-                <span className="text-2xl">{tech.icon}</span>
+                <span className="text-2xl grayscale group-hover:grayscale-0 transition-all duration-300">{tech.icon}</span>
                 <span className="text-white font-medium font-mono">{tech.name}</span>
               </div>
             ))}

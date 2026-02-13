@@ -167,12 +167,21 @@
   background-clip: text;
 }
 
-/* Glass Effect */
+/* Glass Effect with improved backdrop blur */
 .glass {
-  background: rgba(24, 24, 24, 0.7);
+  background: rgba(26, 27, 38, 0.8);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Grayscale filter for icons */
+.grayscale {
+  filter: grayscale(100%);
+}
+
+.grayscale-0 {
+  filter: grayscale(0%);
 }
 
 /* Outline Text */

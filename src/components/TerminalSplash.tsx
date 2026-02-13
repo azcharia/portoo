@@ -175,7 +175,7 @@ const TerminalSplash = ({ onComplete }: { onComplete: () => void }) => {
     };
   }, [weather]);
 
-  // Cloud animation - more clouds when cloudy/rainy
+  // Cloud animation - more clouds when cloudy/rainy, speed based on wind
   useEffect(() => {
     if (!weather) return;
 
@@ -188,11 +188,18 @@ const TerminalSplash = ({ onComplete }: { onComplete: () => void }) => {
       cloudCount = 5;
     }
     
+    // Cloud speed based on wind speed (real-time)
+    // Wind 0-10 km/h = slow (0.05-0.1)
+    // Wind 10-20 km/h = medium (0.1-0.2)
+    // Wind 20+ km/h = fast (0.2-0.35)
+    const baseCloudSpeed = weather.windSpeed < 10 ? 0.05 : weather.windSpeed < 20 ? 0.1 : 0.2;
+    const speedVariation = weather.windSpeed < 10 ? 0.05 : weather.windSpeed < 20 ? 0.1 : 0.15;
+    
     for (let i = 0; i < cloudCount; i++) {
       cloudList.push({
         x: Math.random() * 100,
         y: 5 + Math.random() * 25,
-        speed: 0.05 + Math.random() * 0.15,
+        speed: baseCloudSpeed + Math.random() * speedVariation,
       });
     }
     setClouds(cloudList);
@@ -306,28 +313,124 @@ const TerminalSplash = ({ onComplete }: { onComplete: () => void }) => {
     /   \\`;
   };
 
-  const [tailPosition, setTailPosition] = useState(0);
+  const [carPosition, setCarPosition] = useState(0);
+  const [wheelFrame, setWheelFrame] = useState(0);
+  const [carDirection, setCarDirection] = useState<'left-to-right' | 'right-to-left'>('left-to-right');
+  const [carVisible, setCarVisible] = useState(true);
+  const [birds, setBirds] = useState<Array<{x: number, y: number, frame: number}>>([]);
+  const [roadLines, setRoadLines] = useState<Array<{x: number}>>([]);
 
-  // Animate cat tail
+  // Animate car moving based on wind speed
   useEffect(() => {
+    if (!weather) return;
+    
+    // Calculate car speed based on wind speed
+    const baseSpeed = weather.windSpeed < 10 ? 0.3 : weather.windSpeed < 20 ? 0.5 : 0.8;
+    
     const interval = setInterval(() => {
-      setTailPosition((prev) => (prev + 1) % 3);
-    }, 500);
+      setCarPosition((prev) => {
+        if (carDirection === 'left-to-right') {
+          if (prev >= 110) {
+            // Car reached end, hide it
+            setCarVisible(false);
+            // Wait 3 seconds then show from opposite direction
+            setTimeout(() => {
+              setCarDirection('right-to-left');
+              setCarPosition(110);
+              setCarVisible(true);
+            }, 3000);
+            return prev;
+          }
+          return prev + baseSpeed;
+        } else {
+          // right-to-left
+          if (prev <= -20) {
+            // Car reached end, hide it
+            setCarVisible(false);
+            // Wait 3 seconds then show from opposite direction
+            setTimeout(() => {
+              setCarDirection('left-to-right');
+              setCarPosition(-20);
+              setCarVisible(true);
+            }, 3000);
+            return prev;
+          }
+          return prev - baseSpeed;
+        }
+      });
+      setWheelFrame((prev) => (prev + 1) % 4);
+    }, 100);
+    
+    return () => clearInterval(interval);
+  }, [weather, carDirection]);
+
+  // Animate birds flying
+  useEffect(() => {
+    const birdsList = [
+      { x: 30, y: 15, frame: 0 },
+      { x: 60, y: 20, frame: 1 },
+      { x: 85, y: 18, frame: 0 },
+    ];
+    setBirds(birdsList);
+
+    const interval = setInterval(() => {
+      setBirds((prev) =>
+        prev.map((b) => ({
+          x: b.x > 100 ? -5 : b.x + 0.4,
+          y: b.y + Math.sin(b.x * 0.05) * 0.3,
+          frame: (b.frame + 1) % 2,
+        }))
+      );
+    }, 300);
+
     return () => clearInterval(interval);
   }, []);
 
-  const getCatArt = () => {
-    const tails = ['/', '|', '\\'];
-    const tail = tails[tailPosition];
+  // Animate road lines based on car speed
+  useEffect(() => {
+    if (!weather) return;
     
+    const lines = [
+      { x: 0 },
+      { x: 20 },
+      { x: 40 },
+      { x: 60 },
+      { x: 80 },
+    ];
+    setRoadLines(lines);
+
+    const roadSpeed = weather.windSpeed < 10 ? 1.5 : weather.windSpeed < 20 ? 2 : 3;
+
+    const interval = setInterval(() => {
+      setRoadLines((prev) =>
+        prev.map((line) => ({
+          x: line.x <= -20 ? 100 : line.x - roadSpeed,
+        }))
+      );
+    }, 100);
+
+    return () => clearInterval(interval);
+  }, [weather]);
+
+  const getCarArt = () => {
+    const wheels = ['o', 'O', 'o', '0'];
+    const wheel = wheels[wheelFrame];
+    
+    // Car facing right (left-to-right)
+    if (carDirection === 'left-to-right') {
+      return `
+    ____
+  /|_||_\\
+ (   _   )
+ '-${wheel}---${wheel}-'`;
+    }
+    
+    // Car facing left (right-to-left)
     return `
-       /\\_/\\  
-      ( o.o ) 
-       > ^ <
-      /|   |\\
-     (_|   |_)
-        ${tail} ${tail}
-    `;
+   ____
+  /_||_|\\
+ (   _   )
+ '-${wheel}---${wheel}-'`;
   };
 
   const handleSwipe = (progress: number) => {
@@ -411,7 +514,8 @@ const TerminalSplash = ({ onComplete }: { onComplete: () => void }) => {
   return (
     <div
       ref={canvasRef}
-      className="fixed inset-0 bg-[#1a1b26] overflow-hidden font-mono cursor-grab active:cursor-grabbing"
+      className="fixed inset-0 bg-[#1a1b26] font-mono cursor-grab active:cursor-grabbing"
+      style={{ overflow: 'hidden', overflowX: 'hidden' }}
       onWheel={handleWheel}
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
@@ -420,6 +524,8 @@ const TerminalSplash = ({ onComplete }: { onComplete: () => void }) => {
         opacity: 1 - swipeProgress * 0.5,
         transform: `translateY(${swipeProgress * 50}px)`,
         transition: 'transform 0.1s ease-out, opacity 0.1s ease-out',
+        overflow: 'hidden',
+        overflowX: 'hidden',
       }}
     >
       {/* Lightning Flash Effect */}
@@ -516,18 +622,121 @@ const TerminalSplash = ({ onComplete }: { onComplete: () => void }) => {
       <div className="flex items-center justify-center min-h-screen pt-20 pb-24 px-4 sm:px-6">
         <div className="w-full max-w-7xl">
           <div className="grid lg:grid-cols-[1fr,1.2fr] gap-8 lg:gap-16 items-center">
-            {/* Left Side - Cat */}
+            {/* Left Side - Village Road Scene */}
             <div className="flex flex-col items-center lg:items-start space-y-4 sm:space-y-6">
-              {/* Weather Icon */}
-              <pre className="text-yellow-400 text-sm sm:text-base leading-tight">
-                {getWeatherIcon()}
-              </pre>
+              {/* Village Road Scene */}
+              <div className="relative w-full max-w-md h-64 sm:h-80">
 
-              {/* Animated Cat ASCII Art */}
-              <div className="relative scale-125 sm:scale-150">
-                <pre className="text-green-400 text-base sm:text-lg leading-tight whitespace-pre">
-                  {getCatArt()}
-                </pre>
+                {/* Birds */}
+                {birds.map((bird, i) => (
+                  <div
+                    key={i}
+                    className="absolute text-gray-600 text-xs transition-all duration-300"
+                    style={{
+                      left: `${bird.x}%`,
+                      top: `${bird.y}%`,
+                    }}
+                  >
+                    <pre className="leading-tight">
+                      {bird.frame === 0 ? '^  ^' : 'v  v'}
+                    </pre>
+                  </div>
+                ))}
+
+                {/* Mountains/Hills in background */}
+                <div className="absolute bottom-32 left-0 right-0 text-green-800 text-xs opacity-40">
+                  <pre className="leading-tight text-center">
+{`       /\\        /\\       /\\
+      /  \\      /  \\     /  \\
+     /    \\    /    \\   /    \\
+    /      \\  /      \\ /      \\`}
+                  </pre>
+                </div>
+
+                {/* Trees */}
+                <div className="absolute bottom-24 left-[10%] text-green-600 text-xs">
+                  <pre className="leading-tight">
+{`   ^
+  ^^^
+ ^^^^^
+   |
+   |`}
+                  </pre>
+                </div>
+                <div className="absolute bottom-24 right-[15%] text-green-600 text-xs">
+                  <pre className="leading-tight">
+{`   ^
+  ^^^
+ ^^^^^
+   |
+   |`}
+                  </pre>
+                </div>
+
+                {/* House */}
+                <div className="absolute bottom-20 left-[25%] text-red-400 text-xs">
+                  <pre className="leading-tight">
+{`   /\\
+  /  \\
+ /____\\
+ |[][]|
+ |____|`}
+                  </pre>
+                </div>
+
+                {/* Car moving on road */}
+                {carVisible && (
+                  <div
+                    className="absolute bottom-12 text-cyan-400 text-sm transition-all duration-100"
+                    style={{
+                      left: `${carPosition}%`,
+                    }}
+                  >
+                    <pre className="leading-tight whitespace-pre">
+                      {getCarArt()}
+                    </pre>
+                  </div>
+                )}
+
+                {/* Road */}
+                <div className="absolute bottom-8 left-0 right-0">
+                  {/* Road surface */}
+                  <div className="text-gray-600 text-xs text-center">
+                    <pre className="leading-tight">
+{`================================
+================================`}
+                    </pre>
+                  </div>
+                  
+                  {/* Road lines */}
+                  <div className="absolute top-1 left-0 right-0 text-yellow-300 text-xs">
+                    {roadLines.map((line, i) => (
+                      <span
+                        key={i}
+                        className="absolute transition-all duration-100"
+                        style={{ left: `${line.x}%` }}
+                      >
+                        ----
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Grass/Ground */}
+                <div className="absolute bottom-0 left-0 right-0 text-green-700 text-xs opacity-60 text-center">
+                  <pre className="leading-tight">
+{`"'.,'"'.,'"'.,'"'.,'"'.,'"'.,'"'.,'"'
+.,'"'.,'"'.,'"'.,'"'.,'"'.,'"'.,'"'.,"'`}
+                  </pre>
+                </div>
+
+                {/* Small flowers on grass */}
+                <div className="absolute bottom-2 left-[15%] text-red-400 text-xs">@</div>
+                <div className="absolute bottom-3 left-[25%] text-yellow-400 text-xs">*</div>
+                <div className="absolute bottom-2 right-[20%] text-pink-400 text-xs">@</div>
+                <div className="absolute bottom-3 right-[30%] text-purple-400 text-xs">*</div>
+                <div className="absolute bottom-2 left-[45%] text-yellow-400 text-xs">@</div>
+                <div className="absolute bottom-3 right-[45%] text-red-400 text-xs">*</div>
               </div>
             </div>
 

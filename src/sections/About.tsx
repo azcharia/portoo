@@ -65,13 +65,13 @@ const About = () => {
               }`}
             >
               <div className="space-y-6">
-                <p className="text-lg text-[#b6b6b6] leading-relaxed">
+                <p className="text-lg text-[#b6b6b6] leading-[1.8]">
                   Saya adalah seorang Information Systems student yang proaktif dan penasaran dengan track record akademik yang kuat serta kepemimpinan organisasi. Perjalanan saya di dunia teknologi dimulai dengan passion untuk membangun solusi inovatif yang menyelesaikan masalah dunia nyata.
                 </p>
-                <p className="text-lg text-[#b6b6b6] leading-relaxed">
+                <p className="text-lg text-[#b6b6b6] leading-[1.8]">
                   Saya memiliki pengalaman hands-on dalam membangun dan mendeploy aplikasi Android dengan fokus pada pembuatan <span className="text-[#00ff41] font-medium">interface yang clean dan user-friendly</span>. Saya juga berpengalaman dengan backend development menggunakan Laravel dan PHP, serta integrasi dengan cloud services seperti <span className="text-[#00ff41] font-medium">Azure dan Supabase</span>.
                 </p>
-                <p className="text-lg text-[#b6b6b6] leading-relaxed">
+                <p className="text-lg text-[#b6b6b6] leading-[1.8]">
                   Saat ini saya aktif mengerjakan berbagai project sambil menyelesaikan studi. Saya selalu terbuka untuk kolaborasi dan peluang baru di bidang teknologi, terutama dalam AI integration dan cloud technologies.
                 </p>
               </div>
@@ -163,7 +163,7 @@ const About = () => {
               </div>
 
               {/* Floating Stats Card */}
-              <div className="absolute -bottom-12 -right-8 p-6 rounded-2xl bg-[#181818] border border-white/10 shadow-xl">
+              <div className="absolute -bottom-8 -right-4 lg:-bottom-12 lg:-right-8 p-6 rounded-2xl bg-[#181818] border border-white/10 shadow-xl">
                 <div className="text-center">
                   <div className="font-['Bebas_Neue'] text-4xl text-[#00ff41]">26</div>
                   <div className="text-xs text-[#b6b6b6] font-mono">Years Old</div>

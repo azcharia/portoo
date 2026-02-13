@@ -106,13 +106,13 @@ const Hero = () => {
               {/* Main Headline */}
               <div className="space-y-2">
                 <h1 
-                  className="font-['Bebas_Neue'] text-6xl sm:text-7xl lg:text-8xl xl:text-9xl text-white leading-none animate-slide-in-left"
+                  className="font-['Bebas_Neue'] text-[clamp(3rem,10vw,9rem)] text-white leading-none animate-slide-in-left"
                   style={{ animationDelay: '0.2s' }}
                 >
                   HELLO,
                 </h1>
                 <h1 
-                  className="font-['Bebas_Neue'] text-6xl sm:text-7xl lg:text-8xl xl:text-9xl outline-text-terminal leading-none animate-slide-in-left"
+                  className="font-['Bebas_Neue'] text-[clamp(3rem,10vw,9rem)] outline-text-terminal leading-none animate-slide-in-left"
                   style={{ animationDelay: '0.4s' }}
                 >
                   I'M AN

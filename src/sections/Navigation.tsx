@@ -25,7 +25,14 @@ const Navigation = () => {
   const scrollToSection = (href: string) => {
     const element = document.querySelector(href);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+      const offset = 100; // Offset untuk navbar
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - offset;
+      
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
     }
     setIsMobileMenuOpen(false);
   };
@@ -39,7 +46,7 @@ const Navigation = () => {
             : 'opacity-0 -translate-y-full pointer-events-none'
         }`}
       >
-        <div className="glass rounded-full px-6 py-3 flex items-center gap-8">
+        <div className="rounded-full px-6 py-3 flex items-center gap-8 bg-[#1a1b26]/80 backdrop-blur-xl border border-white/10 shadow-lg">
           <span className="font-['Bebas_Neue'] text-xl text-[#00ff41] tracking-wider font-mono">
             PORTFOLIO
           </span>
