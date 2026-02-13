@@ -306,24 +306,29 @@ const TerminalSplash = ({ onComplete }: { onComplete: () => void }) => {
     /   \\`;
   };
 
-  const jogloHouse = `
-         ╔════════════════╗
-        ╱                  ╲
-       ╱____________________╲
-      ╱                      ╲
-     ╱________________________╲
-    ║                          ║
-    ║     WELCOME HOME         ║
-    ║                          ║
-    ║  ┌────┐      ┌────┐     ║
-    ║  │ ▓▓ │      │ ▓▓ │     ║
-    ║  └────┘      └────┘     ║
-    ║                          ║
-    ║       ┌──────┐           ║
-    ║       │  ▓▓  │           ║
-    ║       └──────┘           ║
-    ╚══════════════════════════╝
-  `;
+  const [tailPosition, setTailPosition] = useState(0);
+
+  // Animate cat tail
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setTailPosition((prev) => (prev + 1) % 3);
+    }, 500);
+    return () => clearInterval(interval);
+  }, []);
+
+  const getCatArt = () => {
+    const tails = ['/', '|', '\\'];
+    const tail = tails[tailPosition];
+    
+    return `
+       /\\_/\\  
+      ( o.o ) 
+       > ^ <
+      /|   |\\
+     (_|   |_)
+        ${tail} ${tail}
+    `;
+  };
 
   const handleSwipe = (progress: number) => {
     setSwipeProgress(progress);
@@ -511,46 +516,18 @@ const TerminalSplash = ({ onComplete }: { onComplete: () => void }) => {
       <div className="flex items-center justify-center min-h-screen pt-20 pb-24 px-4 sm:px-6">
         <div className="w-full max-w-7xl">
           <div className="grid lg:grid-cols-[1fr,1.2fr] gap-8 lg:gap-16 items-center">
-            {/* Left Side - House */}
+            {/* Left Side - Cat */}
             <div className="flex flex-col items-center lg:items-start space-y-4 sm:space-y-6">
               {/* Weather Icon */}
               <pre className="text-yellow-400 text-sm sm:text-base leading-tight">
                 {getWeatherIcon()}
               </pre>
 
-              {/* Joglo House ASCII Art */}
-              <div className="relative scale-90 sm:scale-100">
-                {/* Trees on left */}
-                <pre className="absolute -left-14 sm:-left-16 top-6 text-green-600 text-[10px] leading-tight hidden sm:block">
-{`  ^
- ^^^
-^^^^^
-  |
-  |`}
+              {/* Animated Cat ASCII Art */}
+              <div className="relative scale-125 sm:scale-150">
+                <pre className="text-green-400 text-base sm:text-lg leading-tight whitespace-pre">
+                  {getCatArt()}
                 </pre>
-
-                {/* Main House */}
-                <pre className="text-green-400 text-[9px] sm:text-[11px] leading-tight whitespace-pre">
-                  {jogloHouse}
-                </pre>
-
-                {/* Trees on right */}
-                <pre className="absolute -right-14 sm:-right-16 top-8 text-green-600 text-[10px] leading-tight hidden sm:block">
-{`  ^
- ^^^
-^^^^^
-  |
-  |`}
-                </pre>
-
-                {/* Grass at bottom */}
-                <div className="text-green-700 text-[8px] sm:text-[9px] mt-1 opacity-60">
-                  <pre className="leading-tight">
-{`  ,,  ,,  ,,  ,,  ,,  ,,  ,,  ,,
- ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,`}
-                  </pre>
-                </div>
               </div>
             </div>
 
