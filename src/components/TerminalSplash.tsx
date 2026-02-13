@@ -272,47 +272,6 @@ const TerminalSplash = ({ onComplete }: { onComplete: () => void }) => {
     };
   }, [weather]);
 
-  const getWeatherIcon = () => {
-    if (!weather) return '';
-    
-    if (isThunderstorm(weather.weatherCode)) {
-      return `
-    .-.
-   (   ).
-  (___(__)
-  ⚡ʻ‚ʻ‚ʻ‚ʻ
-   ʻ‚ʻ‚ʻ‚ʻ`;
-    }
-    
-    if (isRaining(weather.weatherCode)) {
-      return `
-    .-.
-   (   ).
-  (___(__)
-   ʻ‚ʻ‚ʻ‚ʻ
-   ʻ‚ʻ‚ʻ‚ʻ`;
-    }
-    
-    if (isCloudy(weather.weatherCode)) {
-      return `
-     .--.
-  .-(    ).
- (___.__)__)`;
-    }
-    
-    if (!weather.isDay) {
-      return `
-    *  .  *
-  .    ☾    .
-    *  .  *`;
-    }
-    
-    return `
-    \\   /
-  ―  ☀  ―
-    /   \\`;
-  };
-
   const [carPosition, setCarPosition] = useState(0);
   const [wheelFrame, setWheelFrame] = useState(0);
   const [carDirection, setCarDirection] = useState<'left-to-right' | 'right-to-left'>('left-to-right');
@@ -515,7 +474,6 @@ const TerminalSplash = ({ onComplete }: { onComplete: () => void }) => {
     <div
       ref={canvasRef}
       className="fixed inset-0 bg-[#1a1b26] font-mono cursor-grab active:cursor-grabbing"
-      style={{ overflow: 'hidden', overflowX: 'hidden' }}
       onWheel={handleWheel}
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
