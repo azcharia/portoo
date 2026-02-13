@@ -33,7 +33,7 @@ const Footer = () => {
   };
 
   return (
-    <footer className="relative bg-[#010101] border-t border-white/5">
+    <footer className="relative bg-[#1a1b26] border-t border-white/5">
       {/* Large CTA Text */}
       <div className="relative py-16 lg:py-24 overflow-hidden">
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
@@ -46,7 +46,7 @@ const Footer = () => {
           <div className="max-w-7xl mx-auto text-center">
             <h3 className="font-['Bebas_Neue'] text-4xl lg:text-6xl text-white mb-4">
               READY TO JOIN{' '}
-              <span className="gradient-text">MY TEAM?</span>
+              <span className="gradient-text-terminal">MY TEAM?</span>
             </h3>
             <p className="text-[#b6b6b6] max-w-xl mx-auto mb-8">
               I'm always open to new opportunities, interesting collaborations, 
@@ -58,7 +58,7 @@ const Footer = () => {
                 e.preventDefault();
                 scrollToSection('#contact');
               }}
-              className="inline-flex items-center gap-2 px-8 py-4 bg-[#d3e865] text-[#010101] font-semibold rounded-full hover:shadow-[0_0_30px_rgba(211,232,101,0.4)] transition-all"
+              className="inline-flex items-center gap-2 px-8 py-4 bg-[#00ff41] text-[#1a1b26] font-semibold rounded-full hover:shadow-[0_0_30px_rgba(0,255,65,0.4)] transition-all font-mono"
             >
               Start Conversation
             </a>
@@ -73,10 +73,10 @@ const Footer = () => {
             {/* Brand */}
             <div className="lg:col-span-1">
               <div className="flex items-center gap-2 mb-4">
-                <div className="w-10 h-10 rounded-xl bg-[#d3e865] flex items-center justify-center">
-                  <Code2 size={24} className="text-[#010101]" />
+                <div className="w-10 h-10 rounded-xl bg-[#00ff41] flex items-center justify-center">
+                  <Code2 size={24} className="text-[#1a1b26]" />
                 </div>
-                <span className="font-['Bebas_Neue'] text-2xl text-white tracking-wider">
+                <span className="font-['Bebas_Neue'] text-2xl text-white tracking-wider font-mono">
                   PORTFOLIO
                 </span>
               </div>
@@ -87,13 +87,13 @@ const Footer = () => {
 
             {/* Navigation */}
             <div>
-              <h4 className="text-white font-semibold mb-4">Navigation</h4>
+              <h4 className="text-white font-semibold mb-4 font-mono">Navigation</h4>
               <ul className="space-y-2">
                 {footerLinks.navigasi.map((link) => (
                   <li key={link.name}>
                     <button
                       onClick={() => scrollToSection(link.href)}
-                      className="text-sm text-[#b6b6b6] hover:text-[#d3e865] transition-colors"
+                      className="text-sm text-[#b6b6b6] hover:text-[#00ff41] transition-colors font-mono"
                     >
                       {link.name}
                     </button>
@@ -104,13 +104,13 @@ const Footer = () => {
 
             {/* Social */}
             <div>
-              <h4 className="text-white font-semibold mb-4">Social</h4>
+              <h4 className="text-white font-semibold mb-4 font-mono">Social</h4>
               <ul className="space-y-2">
                 {footerLinks.sosial.map((link) => (
                   <li key={link.name}>
                     <a
                       href={link.href}
-                      className="text-sm text-[#b6b6b6] hover:text-[#d3e865] transition-colors"
+                      className="text-sm text-[#b6b6b6] hover:text-[#00ff41] transition-colors font-mono"
                     >
                       {link.name}
                     </a>
@@ -121,13 +121,13 @@ const Footer = () => {
 
             {/* Contact */}
             <div>
-              <h4 className="text-white font-semibold mb-4">Contact</h4>
+              <h4 className="text-white font-semibold mb-4 font-mono">Contact</h4>
               <ul className="space-y-2">
                 {footerLinks.kontak.map((link) => (
                   <li key={link.name}>
                     <a
                       href={link.href}
-                      className="text-sm text-[#b6b6b6] hover:text-[#d3e865] transition-colors"
+                      className="text-sm text-[#b6b6b6] hover:text-[#00ff41] transition-colors font-mono"
                     >
                       {link.name}
                     </a>
@@ -149,12 +149,12 @@ const Footer = () => {
           </div>
 
           <div className="flex items-center gap-6">
-            <span className="text-sm text-[#b6b6b6]">
+            <span className="text-sm text-[#b6b6b6] font-mono">
               © {currentYear} Naufal Azaria. All rights reserved.
             </span>
             <button
               onClick={scrollToTop}
-              className="w-10 h-10 rounded-full bg-[#181818] border border-white/10 flex items-center justify-center text-[#b6b6b6] hover:bg-[#d3e865] hover:text-[#010101] hover:border-[#d3e865] transition-all"
+              className="w-10 h-10 rounded-full bg-[#181818] border border-white/10 flex items-center justify-center text-[#b6b6b6] hover:bg-[#00ff41] hover:text-[#1a1b26] hover:border-[#00ff41] transition-all"
               title="Back to top"
             >
               <ArrowUp size={18} />

@@ -87,11 +87,11 @@ const Skills = () => {
     <section
       id="skills"
       ref={sectionRef}
-      className="relative py-24 lg:py-32 bg-[#010101] overflow-hidden"
+      className="relative py-24 lg:py-32 bg-[#1a1b26] overflow-hidden"
     >
       {/* Background */}
       <div className="absolute inset-0 grid-bg opacity-30" />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full bg-[#d3e865]/5 blur-3xl" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full bg-[#00ff41]/5 blur-3xl" />
 
       <div className="relative z-10 w-full px-6 lg:px-12">
         <div className="max-w-7xl mx-auto">
@@ -101,11 +101,11 @@ const Skills = () => {
               isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
             }`}
           >
-            <span className="text-[#d3e865] text-sm font-medium tracking-wider uppercase">
+            <span className="text-[#00ff41] text-sm font-medium tracking-wider uppercase font-mono">
               Skills
             </span>
             <h2 className="font-['Bebas_Neue'] text-5xl lg:text-7xl text-white mt-2">
-              SKILL <span className="gradient-text">SET</span>
+              SKILL <span className="gradient-text-terminal">SET</span>
             </h2>
             <p className="text-[#b6b6b6] mt-4 max-w-2xl mx-auto">
               Teknologi dan tools yang telah saya kuasai untuk mengembangkan aplikasi berkualitas tinggi dan solusi inovatif.
@@ -121,11 +121,11 @@ const Skills = () => {
             {techStack.map((tech, index) => (
               <div
                 key={tech.name}
-                className="group flex items-center gap-3 px-6 py-3 rounded-full bg-[#181818] border border-white/10 hover:border-[#d3e865]/50 transition-all duration-300 hover:scale-105"
+                className="group flex items-center gap-3 px-6 py-3 rounded-full bg-[#181818] border border-white/10 hover:border-[#00ff41]/50 transition-all duration-300 hover:scale-105"
                 style={{ transitionDelay: `${index * 50}ms` }}
               >
                 <span className="text-2xl">{tech.icon}</span>
-                <span className="text-white font-medium">{tech.name}</span>
+                <span className="text-white font-medium font-mono">{tech.name}</span>
               </div>
             ))}
           </div>
@@ -135,15 +135,15 @@ const Skills = () => {
             {skillCategories.map((category, catIndex) => (
               <div
                 key={category.title}
-                className={`p-6 lg:p-8 rounded-2xl bg-[#181818] border border-white/5 hover:border-[#d3e865]/20 transition-all duration-500 card-glow ${
+                className={`p-6 lg:p-8 rounded-2xl bg-[#181818] border border-white/5 hover:border-[#00ff41]/20 transition-all duration-500 card-glow ${
                   isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
                 }`}
                 style={{ transitionDelay: `${300 + catIndex * 100}ms` }}
               >
                 {/* Category Header */}
                 <div className="flex items-center gap-4 mb-6">
-                  <div className="w-12 h-12 rounded-xl bg-[#d3e865]/10 flex items-center justify-center">
-                    <category.icon size={24} className="text-[#d3e865]" />
+                  <div className="w-12 h-12 rounded-xl bg-[#00ff41]/10 flex items-center justify-center">
+                    <category.icon size={24} className="text-[#00ff41]" />
                   </div>
                   <h3 className="font-['Bebas_Neue'] text-2xl text-white">
                     {category.title}
@@ -155,8 +155,8 @@ const Skills = () => {
                   {category.skills.map((skill, skillIndex) => (
                     <div key={skill.name}>
                       <div className="flex justify-between items-center mb-2">
-                        <span className="text-white font-medium">{skill.name}</span>
-                        <span className="text-[#d3e865] text-sm">{skill.level}%</span>
+                        <span className="text-white font-medium font-mono">{skill.name}</span>
+                        <span className="text-[#00ff41] text-sm font-mono">{skill.level}%</span>
                       </div>
                       <div className="skill-bar">
                         <div
@@ -181,18 +181,18 @@ const Skills = () => {
             }`}
           >
             <div className="text-center p-6 rounded-xl bg-[#181818] border border-white/5">
-              <Code2 size={32} className="text-[#d3e865] mx-auto mb-3" />
-              <h4 className="text-white font-semibold mb-1">Clean Code</h4>
+              <Code2 size={32} className="text-[#00ff41] mx-auto mb-3" />
+              <h4 className="text-white font-semibold mb-1 font-mono">Clean Code</h4>
               <p className="text-sm text-[#b6b6b6]">Mengikuti prinsip SOLID dan best practices</p>
             </div>
             <div className="text-center p-6 rounded-xl bg-[#181818] border border-white/5">
-              <GitBranch size={32} className="text-[#d3e865] mx-auto mb-3" />
-              <h4 className="text-white font-semibold mb-1">Project Management</h4>
+              <GitBranch size={32} className="text-[#00ff41] mx-auto mb-3" />
+              <h4 className="text-white font-semibold mb-1 font-mono">Project Management</h4>
               <p className="text-sm text-[#b6b6b6]">Kepemimpinan tim dan technical writing</p>
             </div>
             <div className="text-center p-6 rounded-xl bg-[#181818] border border-white/5">
-              <Cloud size={32} className="text-[#d3e865] mx-auto mb-3" />
-              <h4 className="text-white font-semibold mb-1">Cloud Integration</h4>
+              <Cloud size={32} className="text-[#00ff41] mx-auto mb-3" />
+              <h4 className="text-white font-semibold mb-1 font-mono">Cloud Integration</h4>
               <p className="text-sm text-[#b6b6b6]">Azure, Supabase, dan cloud deployment</p>
             </div>
           </div>

@@ -40,7 +40,7 @@ const Navigation = () => {
         }`}
       >
         <div className="glass rounded-full px-6 py-3 flex items-center gap-8">
-          <span className="font-['Bebas_Neue'] text-xl text-[#d3e865] tracking-wider">
+          <span className="font-['Bebas_Neue'] text-xl text-[#00ff41] tracking-wider font-mono">
             PORTFOLIO
           </span>
           
@@ -49,10 +49,10 @@ const Navigation = () => {
               <button
                 key={link.name}
                 onClick={() => scrollToSection(link.href)}
-                className="relative text-sm text-white/80 hover:text-white transition-colors group"
+                className="relative text-sm text-white/80 hover:text-white transition-colors group font-mono"
               >
                 {link.name}
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#d3e865] transition-all duration-300 group-hover:w-full" />
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#00ff41] transition-all duration-300 group-hover:w-full" />
               </button>
             ))}
           </div>
@@ -77,7 +77,7 @@ const Navigation = () => {
             <button
               key={link.name}
               onClick={() => scrollToSection(link.href)}
-              className="text-3xl font-['Bebas_Neue'] text-white hover:text-[#d3e865] transition-colors"
+              className="text-3xl font-['Bebas_Neue'] text-white hover:text-[#00ff41] transition-colors"
               style={{ animationDelay: `${index * 0.1}s` }}
             >
               {link.name}
@@ -93,7 +93,7 @@ const Navigation = () => {
         }`}
       >
         <div className="w-full px-6 lg:px-12 py-6 flex items-center justify-between">
-          <span className="font-['Bebas_Neue'] text-2xl text-[#d3e865] tracking-wider">
+          <span className="font-['Bebas_Neue'] text-2xl text-[#00ff41] tracking-wider font-mono">
             PORTFOLIO
           </span>
           
@@ -102,10 +102,10 @@ const Navigation = () => {
               <button
                 key={link.name}
                 onClick={() => scrollToSection(link.href)}
-                className="relative text-sm text-white/80 hover:text-white transition-colors group"
+                className="relative text-sm text-white/80 hover:text-white transition-colors group font-mono"
               >
                 {link.name}
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#d3e865] transition-all duration-300 group-hover:w-full" />
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#00ff41] transition-all duration-300 group-hover:w-full" />
               </button>
             ))}
           </div>

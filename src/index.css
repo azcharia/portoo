@@ -6,25 +6,25 @@
 
 @layer base {
   :root {
-    --background: 0 0% 2%;
+    --background: 0 0% 10%;
     --foreground: 0 0% 100%;
     --card: 0 0% 9%;
     --card-foreground: 0 0% 100%;
     --popover: 0 0% 9%;
     --popover-foreground: 0 0% 100%;
-    --primary: 70 75% 65%;
-    --primary-foreground: 0 0% 2%;
+    --primary: 142 100% 50%;
+    --primary-foreground: 0 0% 10%;
     --secondary: 0 0% 71%;
     --secondary-foreground: 0 0% 2%;
     --muted: 0 0% 15%;
     --muted-foreground: 0 0% 71%;
-    --accent: 70 75% 65%;
-    --accent-foreground: 0 0% 2%;
+    --accent: 142 100% 50%;
+    --accent-foreground: 0 0% 10%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
     --border: 0 0% 20%;
     --input: 0 0% 20%;
-    --ring: 70 75% 65%;
+    --ring: 142 100% 50%;
     --radius: 0.625rem;
   }
 }
@@ -51,16 +51,16 @@
 }
 
 ::-webkit-scrollbar-track {
-  background: #010101;
+  background: #1a1b26;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #d3e865;
+  background: #00ff41;
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #c5d95a;
+  background: #00cc33;
 }
 
 /* Animations */
@@ -70,8 +70,8 @@
 }
 
 @keyframes pulse-glow {
-  0%, 100% { box-shadow: 0 0 20px rgba(211, 232, 101, 0.3); }
-  50% { box-shadow: 0 0 40px rgba(211, 232, 101, 0.6); }
+  0%, 100% { box-shadow: 0 0 20px rgba(0, 255, 65, 0.3); }
+  50% { box-shadow: 0 0 40px rgba(0, 255, 65, 0.6); }
 }
 
 @keyframes gradient-shift {
@@ -154,7 +154,14 @@
 
 /* Gradient Text */
 .gradient-text {
-  background: linear-gradient(135deg, #d3e865 0%, #a8c94d 100%);
+  background: linear-gradient(135deg, #00ff41 0%, #00cc33 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gradient-text-terminal {
+  background: linear-gradient(135deg, #00ff41 0%, #00cc33 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -170,7 +177,12 @@
 
 /* Outline Text */
 .outline-text {
-  -webkit-text-stroke: 2px #d3e865;
+  -webkit-text-stroke: 2px #00ff41;
+  -webkit-text-fill-color: transparent;
+}
+
+.outline-text-terminal {
+  -webkit-text-stroke: 2px #00ff41;
   -webkit-text-fill-color: transparent;
 }
 
@@ -202,7 +214,7 @@
   left: -50%;
   width: 200%;
   height: 200%;
-  background: radial-gradient(circle, rgba(211, 232, 101, 0.1) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(0, 255, 65, 0.1) 0%, transparent 70%);
   opacity: 0;
   transition: opacity 0.3s ease;
   pointer-events: none;
@@ -248,7 +260,7 @@
 
 .skill-bar-fill {
   height: 100%;
-  background: linear-gradient(90deg, #d3e865, #a8c94d);
+  background: linear-gradient(90deg, #00ff41, #00cc33);
   border-radius: 4px;
   transition: width 1.5s ease-out;
 }
@@ -260,7 +272,7 @@
   top: 0;
   bottom: 0;
   width: 2px;
-  background: linear-gradient(180deg, #d3e865, transparent);
+  background: linear-gradient(180deg, #00ff41, transparent);
   transform: translateX(-50%);
 }
 
@@ -307,25 +319,26 @@
   display: inline-flex;
   align-items: center;
   padding: 6px 14px;
-  background: rgba(211, 232, 101, 0.1);
-  border: 1px solid rgba(211, 232, 101, 0.3);
+  background: rgba(0, 255, 65, 0.1);
+  border: 1px solid rgba(0, 255, 65, 0.3);
   border-radius: 20px;
   font-size: 0.75rem;
   font-weight: 500;
-  color: #d3e865;
+  color: #00ff41;
+  font-family: 'Courier New', monospace;
   transition: all 0.3s ease;
 }
 
 .tag:hover {
-  background: rgba(211, 232, 101, 0.2);
-  border-color: #d3e865;
+  background: rgba(0, 255, 65, 0.2);
+  border-color: #00ff41;
 }
 
 /* Grid Background */
 .grid-bg {
   background-image: 
-    linear-gradient(rgba(211, 232, 101, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(211, 232, 101, 0.03) 1px, transparent 1px);
+    linear-gradient(rgba(0, 255, 65, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 255, 65, 0.03) 1px, transparent 1px);
   background-size: 50px 50px;
 }
 
@@ -333,7 +346,7 @@
 .custom-cursor {
   width: 20px;
   height: 20px;
-  border: 2px solid #d3e865;
+  border: 2px solid #00ff41;
   border-radius: 50%;
   position: fixed;
   pointer-events: none;
@@ -344,6 +357,10 @@
 /* Responsive */
 @media (max-width: 768px) {
   .outline-text {
-    -webkit-text-stroke: 1px #d3e865;
+    -webkit-text-stroke: 1px #00ff41;
+  }
+  
+  .outline-text-terminal {
+    -webkit-text-stroke: 1px #00ff41;
   }
 }

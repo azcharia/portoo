@@ -87,12 +87,12 @@ const Projects = () => {
     <section
       id="projects"
       ref={sectionRef}
-      className="relative py-24 lg:py-32 bg-[#010101] overflow-hidden"
+      className="relative py-24 lg:py-32 bg-[#1a1b26] overflow-hidden"
     >
       {/* Background */}
       <div className="absolute inset-0">
         <div className="absolute top-0 left-0 w-full h-1/2 bg-gradient-to-b from-[#181818]/50 to-transparent" />
-        <div className="absolute bottom-0 right-0 w-96 h-96 rounded-full bg-[#d3e865]/5 blur-3xl" />
+        <div className="absolute bottom-0 right-0 w-96 h-96 rounded-full bg-[#00ff41]/5 blur-3xl" />
       </div>
 
       <div className="relative z-10 w-full px-6 lg:px-12">
@@ -103,11 +103,11 @@ const Projects = () => {
               isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
             }`}
           >
-            <span className="text-[#d3e865] text-sm font-medium tracking-wider uppercase">
+            <span className="text-[#00ff41] text-sm font-medium tracking-wider uppercase font-mono">
               Portfolio
             </span>
             <h2 className="font-['Bebas_Neue'] text-5xl lg:text-7xl text-white mt-2">
-              MY <span className="gradient-text">PROJECTS</span>
+              MY <span className="gradient-text-terminal">PROJECTS</span>
             </h2>
             <p className="text-[#b6b6b6] mt-4 max-w-2xl">
               A selection of projects I've built during my studies and freelance work, showcasing my skills in mobile and web development.
@@ -133,7 +133,7 @@ const Projects = () => {
                 />
                 
                 {/* Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-[#010101] via-transparent to-transparent opacity-60" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#1a1b26] via-transparent to-transparent opacity-60" />
                 
                 {/* Project Badge */}
                 <div 
@@ -151,13 +151,13 @@ const Projects = () => {
               {/* Navigation Arrows */}
               <button
                 onClick={prevProject}
-                className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-[#181818]/80 backdrop-blur-sm border border-white/10 flex items-center justify-center text-white hover:bg-[#d3e865] hover:text-[#010101] transition-all"
+                className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-[#181818]/80 backdrop-blur-sm border border-white/10 flex items-center justify-center text-white hover:bg-[#00ff41] hover:text-[#1a1b26] transition-all"
               >
                 <ChevronLeft size={24} />
               </button>
               <button
                 onClick={nextProject}
-                className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-[#181818]/80 backdrop-blur-sm border border-white/10 flex items-center justify-center text-white hover:bg-[#d3e865] hover:text-[#010101] transition-all"
+                className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-[#181818]/80 backdrop-blur-sm border border-white/10 flex items-center justify-center text-white hover:bg-[#00ff41] hover:text-[#1a1b26] transition-all"
               >
                 <ChevronRight size={24} />
               </button>
@@ -188,14 +188,14 @@ const Projects = () => {
 
               {/* Features */}
               <div>
-                <h4 className="text-white font-semibold mb-3">Fitur Utama:</h4>
+                <h4 className="text-white font-semibold mb-3 font-mono">Fitur Utama:</h4>
                 <div className="grid grid-cols-2 gap-2">
                   {projects[activeProject].features.map((feature) => (
                     <div
                       key={feature}
                       className="flex items-center gap-2 text-sm text-[#b6b6b6]"
                     >
-                      <Star size={14} className="text-[#d3e865]" />
+                      <Star size={14} className="text-[#00ff41]" />
                       {feature}
                     </div>
                   ))}
@@ -206,14 +206,14 @@ const Projects = () => {
               <div className="flex gap-4 pt-4">
                 <a
                   href={projects[activeProject].demo}
-                  className="flex items-center gap-2 px-6 py-3 bg-[#d3e865] text-[#010101] font-semibold rounded-full hover:shadow-[0_0_30px_rgba(211,232,101,0.4)] transition-all"
+                  className="flex items-center gap-2 px-6 py-3 bg-[#00ff41] text-[#1a1b26] font-semibold rounded-full hover:shadow-[0_0_30px_rgba(0,255,65,0.4)] transition-all font-mono"
                 >
                   <ExternalLink size={18} />
                   Live Demo
                 </a>
                 <a
                   href={projects[activeProject].github}
-                  className="flex items-center gap-2 px-6 py-3 border border-white/20 text-white font-semibold rounded-full hover:border-[#d3e865] hover:text-[#d3e865] transition-all"
+                  className="flex items-center gap-2 px-6 py-3 border border-white/20 text-white font-semibold rounded-full hover:border-[#00ff41] hover:text-[#00ff41] transition-all font-mono"
                 >
                   <Github size={18} />
                   Source Code
@@ -234,7 +234,7 @@ const Projects = () => {
                 onClick={() => setActiveProject(index)}
                 className={`relative w-20 h-28 rounded-xl overflow-hidden border-2 transition-all duration-300 ${
                   activeProject === index 
-                    ? 'border-[#d3e865] scale-110' 
+                    ? 'border-[#00ff41] scale-110' 
                     : 'border-white/10 opacity-50 hover:opacity-80'
                 }`}
               >
